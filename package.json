@@ -1,0 +1,34 @@
+{
+  "name": "@lekhanpro/gitmortem",
+  "version": "0.1.0",
+  "description": "Instant incident postmortems from a git commit hash",
+  "license": "MIT",
+  "bin": {
+    "gitmortem": "bin/gitmortem.js"
+  },
+  "files": [
+    "bin",
+    "LICENSE",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "git",
+    "postmortem",
+    "incident",
+    "cli",
+    "sre",
+    "devops"
+  ],
+  "homepage": "https://lekhanpro.github.io/gitmortem/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lekhanpro/gitmortem.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lekhanpro/gitmortem/issues"
+  }
+}
+

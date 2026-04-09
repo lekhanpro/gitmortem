@@ -1,0 +1,14 @@
+<svg width="960" height="690" viewBox="0 0 960 690" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="690" rx="30" fill="#EEE7DB"/>
+  <rect x="46" y="42" width="868" height="606" rx="28" fill="#FFFDF8" stroke="#D9CDBE"/>
+  <text fill="#1B1C1F" xml:space="preserve" style="white-space: pre" font-family="Space Grotesk" font-size="40" font-weight="700" letter-spacing="-0.04em"><tspan x="82" y="112.6">Postmortem: 9af31c2d - SEV2</tspan></text>
+  <text fill="#6F736D" xml:space="preserve" style="white-space: pre" font-family="Space Grotesk" font-size="22"><tspan x="82" y="154.2">A config refactor removed the provider-aware fallback and broke startup on the default path.</tspan></text>
+  <rect x="82" y="192" width="796" height="110" rx="18" fill="#F7F1E7"/>
+  <text fill="#1B1C1F" xml:space="preserve" style="white-space: pre" font-family="IBM Plex Mono" font-size="18"><tspan x="106" y="228.2">Commit         9af31c2d</tspan><tspan x="106" y="258.2">Severity       SEV2</tspan><tspan x="420" y="228.2">Time to Detect 12 minutes</tspan><tspan x="420" y="258.2">Confidence     high</tspan></text>
+  <rect x="82" y="332" width="374" height="248" rx="18" fill="#FBF6EE" stroke="#E4D9CA"/>
+  <text fill="#1B1C1F" xml:space="preserve" style="white-space: pre" font-family="Space Grotesk" font-size="24" font-weight="700"><tspan x="108" y="372.52">Blast Radius</tspan></text>
+  <text fill="#4D535D" xml:space="preserve" style="white-space: pre" font-family="IBM Plex Mono" font-size="17"><tspan x="108" y="414.2">gitmortem/config.py</tspan><tspan x="108" y="444.2">gitmortem/cli.py</tspan><tspan x="108" y="474.2">gitmortem/llm.py</tspan><tspan x="108" y="504.2">tests/test_cli.py</tspan></text>
+  <rect x="502" y="332" width="376" height="248" rx="18" fill="#FBF6EE" stroke="#E4D9CA"/>
+  <text fill="#1B1C1F" xml:space="preserve" style="white-space: pre" font-family="Space Grotesk" font-size="24" font-weight="700"><tspan x="528" y="372.52">Never Again</tspan></text>
+  <text fill="#4D535D" xml:space="preserve" style="white-space: pre" font-family="IBM Plex Mono" font-size="17"><tspan x="528" y="414.2">[P0] restore fallback logic</tspan><tspan x="528" y="444.2">[P1] add provider startup tests</tspan><tspan x="528" y="474.2">[P1] run README quick-start after release</tspan><tspan x="528" y="504.2">[P2] document provider defaults</tspan></text>
+</svg>

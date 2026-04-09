@@ -1,0 +1,14 @@
+<svg width="960" height="690" viewBox="0 0 960 690" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="690" rx="30" fill="#0F141B"/>
+  <rect x="34" y="34" width="892" height="622" rx="24" fill="#121924" stroke="#2C394A"/>
+  <rect x="34" y="34" width="892" height="52" rx="24" fill="#182232"/>
+  <circle cx="72" cy="60" r="7" fill="#FF8A64"/>
+  <circle cx="98" cy="60" r="7" fill="#FFD66B"/>
+  <circle cx="124" cy="60" r="7" fill="#7ED8C1"/>
+  <text fill="#B8C0CB" xml:space="preserve" style="white-space: pre" font-family="IBM Plex Mono" font-size="18"><tspan x="154" y="66.2">$ gitmortem HEAD~1 --provider groq</tspan></text>
+  <text fill="#FCEBD8" xml:space="preserve" style="white-space: pre" font-family="IBM Plex Mono" font-size="18"><tspan x="66" y="130.2">Postmortem: 9af31c2d - SEV2</tspan><tspan x="66" y="168.2">Incident Summary</tspan><tspan x="66" y="206.2">Commit         9af31c2d</tspan><tspan x="66" y="236.2">Author         release-bot</tspan><tspan x="66" y="266.2">Impact         CLI startup failed for default provider users</tspan><tspan x="66" y="316.2">Root Cause     Null-guard removed from provider-aware model fallback</tspan><tspan x="66" y="366.2">Trigger        Release shipped with Groq as default path</tspan><tspan x="66" y="416.2">Timeline       -14m packaging merged</tspan><tspan x="66" y="446.2">               T+0 broken commit shipped</tspan><tspan x="66" y="476.2">               +12m first failure report arrived</tspan><tspan x="66" y="536.2">Immediate      [P0] restore fallback logic</tspan><tspan x="66" y="566.2">               [P1] add startup smoke tests for provider defaults</tspan></text>
+  <rect x="590" y="498" width="286" height="108" rx="20" fill="#191F2A"/>
+  <text fill="#7ED8C1" xml:space="preserve" style="white-space: pre" font-family="Space Grotesk" font-size="22" font-weight="700"><tspan x="620" y="540.52">Readable under pressure</tspan></text>
+  <text fill="#B8C0CB" xml:space="preserve" style="white-space: pre" font-family="Space Grotesk" font-size="18"><tspan x="620" y="572.2">Designed for incident mode, not</tspan><tspan x="620" y="597.2">for vague commit summarization.</tspan></text>
+</svg>
+

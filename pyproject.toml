@@ -54,6 +54,7 @@ gitmortem = "gitmortem.cli:run"
 Homepage = "https://github.com/lekhanpro/gitmortem"
 Repository = "https://github.com/lekhanpro/gitmortem"
 Issues = "https://github.com/lekhanpro/gitmortem/issues"
+Documentation = "https://lekhanpro.github.io/gitmortem/"
 
 [tool.hatch.build.targets.wheel]
 packages = ["gitmortem"]
