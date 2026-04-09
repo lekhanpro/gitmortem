@@ -22,7 +22,7 @@ pip install gitmortem
 For local development:
 
 ```bash
-git clone https://github.com/yourusername/gitmortem
+git clone https://github.com/lekhanpro/gitmortem
 cd gitmortem
 pip install -e ".[dev]"
 ```

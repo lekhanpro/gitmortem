@@ -127,7 +127,7 @@ class StructuredLLMClient:
             client_kwargs["base_url"] = self.settings.base_url
         if self.settings.provider == "openrouter":
             client_kwargs["default_headers"] = {
-                "HTTP-Referer": "https://github.com/yourusername/gitmortem",
+                "HTTP-Referer": "https://github.com/lekhanpro/gitmortem",
                 "X-Title": "gitmortem",
             }
 
