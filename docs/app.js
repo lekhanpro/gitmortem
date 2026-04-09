@@ -2,15 +2,38 @@ const tabs = [...document.querySelectorAll(".tab-button")];
 const panels = [...document.querySelectorAll(".tab-panel")];
 const copyButtons = [...document.querySelectorAll(".copy-button")];
 const navLinks = [...document.querySelectorAll(".site-nav a[href^='#']")];
-const sections = [...document.querySelectorAll("main .section[id]")];
+const sections = [...document.querySelectorAll("[data-section]")];
 const revealTargets = [...document.querySelectorAll("[data-reveal]")];
-const header = document.querySelector(".site-header");
+const header = document.querySelector(".masthead");
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-const liveRegion = document.createElement("div");
+const signalPanel = document.querySelector(".signal-panel");
+const signalTitle = document.querySelector("[data-signal-title]");
+const signalBody = document.querySelector("[data-signal-body]");
+const signalCaption = document.querySelector("[data-signal-caption]");
+const signalDots = [...document.querySelectorAll(".signal-dots span")];
 
-liveRegion.setAttribute("aria-live", "polite");
+const liveRegion = document.createElement("div");
 liveRegion.className = "sr-only";
+liveRegion.setAttribute("aria-live", "polite");
 document.body.appendChild(liveRegion);
+
+const signalFrames = [
+  {
+    title: "Root Cause",
+    body: "Provider fallback vanished during a config refactor.",
+    caption: "Generated from diff facts, dependency hints, and nearby commit context."
+  },
+  {
+    title: "Blast Radius",
+    body: "Startup path, config loading, and report generation were all exposed.",
+    caption: "Useful when the real question is who else should check their systems next."
+  },
+  {
+    title: "Never Again",
+    body: "Add startup smoke tests and release checks before the next deploy.",
+    caption: "The report closes with prevention because explanation alone is not enough."
+  }
+];
 
 function activateTab(tab) {
   const target = tab.dataset.tab;
@@ -33,7 +56,6 @@ function activateTab(tab) {
 for (const [index, tab] of tabs.entries()) {
   tab.setAttribute("role", "tab");
   tab.setAttribute("tabindex", index === 0 ? "0" : "-1");
-  tab.setAttribute("aria-selected", tab.classList.contains("is-active") ? "true" : "false");
 
   tab.addEventListener("click", () => activateTab(tab));
   tab.addEventListener("keydown", (event) => {
@@ -117,7 +139,7 @@ if (!reduceMotion.matches) {
         }
       }
     },
-    { rootMargin: "0px 0px -10% 0px", threshold: 0.16 }
+    { threshold: 0.14, rootMargin: "0px 0px -8% 0px" }
   );
 
   for (const target of revealTargets) {
@@ -155,7 +177,9 @@ if (sections.length > 0 && navLinks.length > 0) {
   );
 
   for (const section of sections) {
-    navObserver.observe(section);
+    if (section.id) {
+      navObserver.observe(section);
+    }
   }
 }
 
@@ -163,8 +187,36 @@ function syncHeaderState() {
   if (!header) {
     return;
   }
-  header.classList.toggle("is-scrolled", window.scrollY > 16);
+  header.classList.toggle("is-scrolled", window.scrollY > 18);
 }
 
 syncHeaderState();
 window.addEventListener("scroll", syncHeaderState, { passive: true });
+
+if (signalPanel && signalTitle && signalBody && signalCaption && signalDots.length === signalFrames.length) {
+  let signalIndex = 0;
+
+  const renderSignal = (index) => {
+    const frame = signalFrames[index];
+    signalPanel.classList.add("is-changing");
+
+    window.setTimeout(() => {
+      signalTitle.textContent = frame.title;
+      signalBody.textContent = frame.body;
+      signalCaption.textContent = frame.caption;
+      signalDots.forEach((dot, dotIndex) => {
+        dot.classList.toggle("is-active", dotIndex === index);
+      });
+      signalPanel.classList.remove("is-changing");
+    }, reduceMotion.matches ? 0 : 140);
+  };
+
+  if (!reduceMotion.matches) {
+    window.setInterval(() => {
+      signalIndex = (signalIndex + 1) % signalFrames.length;
+      renderSignal(signalIndex);
+    }, 3200);
+  } else {
+    renderSignal(signalIndex);
+  }
+}
