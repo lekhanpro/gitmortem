@@ -12,3 +12,5 @@ htmlcov/
 reports/
 .env
 temp-repo/
+!docs/*.html
+!docs/**/*.html
