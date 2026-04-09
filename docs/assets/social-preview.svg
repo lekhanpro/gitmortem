@@ -1,0 +1,46 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" rx="36" fill="#0E131B"/>
+  <rect x="28" y="28" width="1144" height="574" rx="30" fill="url(#g1)"/>
+  <circle cx="968" cy="110" r="148" fill="#7ED8C1" fill-opacity="0.12"/>
+  <circle cx="1064" cy="482" r="128" fill="#FF9C54" fill-opacity="0.1"/>
+  <rect x="74" y="74" width="494" height="482" rx="28" fill="#121924" stroke="#304055"/>
+  <text x="102" y="136" fill="#7ED8C1" font-family="IBM Plex Mono" font-size="18" letter-spacing="0.16em">GITMORTEM</text>
+  <text x="102" y="214" fill="#F4EFE6" font-family="Space Grotesk" font-size="56" font-weight="700" letter-spacing="-0.05em">Turn one commit</text>
+  <text x="102" y="274" fill="#F4EFE6" font-family="Space Grotesk" font-size="56" font-weight="700" letter-spacing="-0.05em">into a report.</text>
+  <text x="102" y="336" fill="#B8C0CB" font-family="Space Grotesk" font-size="23">Root cause, blast radius, timeline,</text>
+  <text x="102" y="370" fill="#B8C0CB" font-family="Space Grotesk" font-size="23">and prevention in one command.</text>
+  <rect x="102" y="426" width="208" height="56" rx="28" fill="#FF9C54"/>
+  <text x="146" y="461" fill="#17120F" font-family="Space Grotesk" font-size="21" font-weight="700">gitmortem</text>
+  <rect x="330" y="426" width="172" height="56" rx="28" fill="#182130" stroke="#304055"/>
+  <text x="360" y="461" fill="#F4EFE6" font-family="Space Grotesk" font-size="21" font-weight="700">Groq default</text>
+  <rect x="610" y="74" width="516" height="482" rx="28" fill="#111823" stroke="#304055"/>
+  <rect x="610" y="74" width="516" height="52" rx="28" fill="#161E2C"/>
+  <circle cx="644" cy="100" r="6" fill="#FF8A64"/>
+  <circle cx="664" cy="100" r="6" fill="#FFD66B"/>
+  <circle cx="684" cy="100" r="6" fill="#7ED8C1"/>
+  <text x="712" y="106" fill="#B8C0CB" font-family="IBM Plex Mono" font-size="15">$ gitmortem HEAD~1</text>
+  <rect x="642" y="146" width="452" height="116" rx="20" fill="#182130"/>
+  <text x="670" y="188" fill="#F4EFE6" font-family="Space Grotesk" font-size="22" font-weight="700">Incident Summary</text>
+  <text x="670" y="218" fill="#B8C0CB" font-family="IBM Plex Mono" font-size="15">Commit        9af31c2d</text>
+  <text x="670" y="240" fill="#B8C0CB" font-family="IBM Plex Mono" font-size="15">Severity      SEV2</text>
+  <text x="888" y="218" fill="#B8C0CB" font-family="IBM Plex Mono" font-size="15">Detect        12m</text>
+  <text x="888" y="240" fill="#B8C0CB" font-family="IBM Plex Mono" font-size="15">Confidence    high</text>
+  <rect x="642" y="284" width="214" height="232" rx="20" fill="#121924" stroke="#304055"/>
+  <text x="666" y="324" fill="#7ED8C1" font-family="IBM Plex Mono" font-size="14" letter-spacing="0.12em">ROOT CAUSE</text>
+  <text x="666" y="360" fill="#FCEBD8" font-family="Space Grotesk" font-size="20" font-weight="700">Provider fallback</text>
+  <text x="666" y="386" fill="#FCEBD8" font-family="Space Grotesk" font-size="20" font-weight="700">lost its guard.</text>
+  <text x="666" y="426" fill="#B8C0CB" font-family="Space Grotesk" font-size="16">Default path failed</text>
+  <text x="666" y="450" fill="#B8C0CB" font-family="Space Grotesk" font-size="16">before report generation.</text>
+  <rect x="872" y="284" width="222" height="232" rx="20" fill="#121924" stroke="#304055"/>
+  <text x="896" y="324" fill="#7ED8C1" font-family="IBM Plex Mono" font-size="14" letter-spacing="0.12em">ACTIONS</text>
+  <text x="896" y="362" fill="#F4EFE6" font-family="Space Grotesk" font-size="18" font-weight="700">[P0] restore fallback</text>
+  <text x="896" y="392" fill="#F4EFE6" font-family="Space Grotesk" font-size="18" font-weight="700">[P1] add startup tests</text>
+  <text x="896" y="422" fill="#F4EFE6" font-family="Space Grotesk" font-size="18" font-weight="700">[P1] add release smoke</text>
+  <text x="896" y="466" fill="#B8C0CB" font-family="Space Grotesk" font-size="15">Offline mode still works.</text>
+  <defs>
+    <linearGradient id="g1" x1="44" y1="38" x2="1140" y2="592" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#121924"/>
+      <stop offset="1" stop-color="#0F141D"/>
+    </linearGradient>
+  </defs>
+</svg>

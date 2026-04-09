@@ -3,11 +3,26 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>gitmortem | Turn a bad commit into a sharp incident report</title>
+    <title>gitmortem | Production-grade postmortems from a commit hash</title>
     <meta
       name="description"
-      content="gitmortem turns a commit hash into a postmortem with root cause, blast radius, timeline, and never-again actions."
+      content="gitmortem turns a commit hash into a sharp incident report with root cause, blast radius, timeline, severity, and prevention steps."
     />
+    <meta property="og:title" content="gitmortem | Production-grade postmortems from a commit hash" />
+    <meta
+      property="og:description"
+      content="Turn one suspicious commit into an incident report people can act on."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://lekhanpro.github.io/gitmortem/" />
+    <meta property="og:image" content="https://lekhanpro.github.io/gitmortem/assets/social-preview.svg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="gitmortem" />
+    <meta
+      name="twitter:description"
+      content="Root cause, blast radius, timeline, and never-again actions from one commit hash."
+    />
+    <meta name="twitter:image" content="https://lekhanpro.github.io/gitmortem/assets/social-preview.svg" />
     <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -18,90 +33,295 @@
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
+    <div class="ambient ambient-left"></div>
+    <div class="ambient ambient-right"></div>
+
     <div class="page-shell">
       <header class="site-header">
-        <a class="brand" href="#top">
+        <a class="brand" href="#top" aria-label="gitmortem home">
           <span class="brand-mark">gm</span>
           <span class="brand-copy">
             <strong>gitmortem</strong>
             <span>Because someone has to explain what you broke.</span>
           </span>
         </a>
+
         <nav class="site-nav">
-          <a href="#install">Install</a>
-          <a href="#demo">Demo</a>
-          <a href="#why">Why it lands</a>
+          <a href="#demo" data-nav-link="demo">Demo</a>
+          <a href="#anatomy" data-nav-link="anatomy">Output</a>
+          <a href="#install" data-nav-link="install">Install</a>
+          <a href="#faq" data-nav-link="faq">FAQ</a>
           <a href="https://github.com/lekhanpro/gitmortem">GitHub</a>
         </nav>
       </header>
 
       <main id="top">
-        <section class="hero">
+        <section class="section hero" data-section="top" data-reveal>
           <div class="hero-copy">
             <p class="eyebrow">Incident intelligence for suspicious commits</p>
-            <h1>Turn one hash into a postmortem people actually read.</h1>
+            <h1>Turn one bad hash into a postmortem people actually trust.</h1>
             <p class="hero-text">
-              <code>gitmortem</code> takes a commit hash and generates a clean incident
-              narrative: root cause, blast radius, timeline, severity, and the
-              never-again checklist. Groq is the default provider, but your team can
-              swap to OpenAI, Anthropic, OpenRouter, Ollama, or any compatible endpoint.
+              <code>gitmortem</code> converts a commit hash into a production-style
+              incident report: root cause, blast radius, timeline, severity, and the
+              never-again checklist. Groq is the default path, but the provider layer
+              stays open to OpenAI, Anthropic, OpenRouter, Ollama, and compatible APIs.
             </p>
+
             <div class="hero-actions">
-              <a class="button button-primary" href="#install">Install it</a>
-              <a class="button button-secondary" href="https://github.com/lekhanpro/gitmortem">
-                View repository
+              <a
+                class="button button-primary"
+                href="https://github.com/lekhanpro/gitmortem/blob/main/examples/sample-postmortem.md"
+              >
+                Read sample report
+              </a>
+              <a class="button button-secondary" href="#install">
+                Install gitmortem
               </a>
             </div>
+
+            <div class="command-strip">
+              <span class="command-label">Quick start</span>
+              <code>gitmortem HEAD~1 --provider groq</code>
+            </div>
+
             <ul class="signal-list">
-              <li>Offline mode for pure git facts</li>
-              <li>Markdown plus standalone HTML output</li>
-              <li>Launch-ready docs, install scripts, and release flow</li>
+              <li>Offline mode when you need deterministic git facts only</li>
+              <li>Markdown and standalone HTML output for incident writeups</li>
+              <li>Install via pip, curl | bash, PowerShell, or npm wrapper</li>
             </ul>
           </div>
-          <div class="hero-visual">
-            <img
-              src="./assets/hero-banner.svg"
-              alt="gitmortem banner preview"
-              loading="eager"
-            />
+
+          <div class="hero-stack">
+            <article class="terminal-card">
+              <div class="terminal-topbar">
+                <span></span>
+                <span></span>
+                <span></span>
+                <code>$ gitmortem 9af31c2d</code>
+              </div>
+              <div class="terminal-body">
+                <div class="terminal-line">
+                  <span class="terminal-key">Severity</span>
+                  <strong>SEV2</strong>
+                </div>
+                <div class="terminal-line">
+                  <span class="terminal-key">Root Cause</span>
+                  <p>Provider-aware model fallback was removed during config refactor.</p>
+                </div>
+                <div class="terminal-line">
+                  <span class="terminal-key">Blast Radius</span>
+                  <p>config, cli, llm path, startup smoke tests</p>
+                </div>
+                <div class="terminal-line">
+                  <span class="terminal-key">Immediate</span>
+                  <p>[P0] restore fallback logic</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="summary-card">
+              <span class="summary-label">What makes this useful</span>
+              <h2>The output is shaped like an incident document, not a code toy.</h2>
+              <p>
+                This is not just commit summarization. It is structured to answer the
+                follow-up questions a team actually asks after a production failure.
+              </p>
+            </article>
           </div>
         </section>
 
         <section class="stats-row">
           <article>
-            <span class="stat-label">Core output</span>
-            <strong>Root cause + blast radius + timeline</strong>
+            <span class="stat-label">Primary output</span>
+            <strong>Root cause + timeline + prevention</strong>
           </article>
           <article>
-            <span class="stat-label">Provider model</span>
-            <strong>Groq-first, multi-provider by design</strong>
+            <span class="stat-label">Run mode</span>
+            <strong>LLM-backed analysis or offline git facts</strong>
           </article>
           <article>
-            <span class="stat-label">Install surfaces</span>
-            <strong>pip, curl | bash, npm wrapper, source</strong>
+            <span class="stat-label">Shareable output</span>
+            <strong>Markdown and standalone HTML reports</strong>
           </article>
         </section>
 
-        <section class="install-section" id="install">
+        <section class="section story-grid" id="demo" data-section="demo" data-reveal>
+          <article class="story-card story-card-large" data-reveal>
+            <div class="section-heading compact">
+              <p class="eyebrow">Proof</p>
+              <h2>See the output before you decide to install it</h2>
+            </div>
+            <p class="section-copy">
+              Good repos do not ask for trust first. They show what the thing actually
+              produces. These are the kinds of artifacts gitmortem is built to generate.
+            </p>
+            <div class="proof-stack">
+              <div class="proof-panel">
+                <span class="proof-label">Terminal run</span>
+                <pre><code>$ gitmortem 66c16848 --no-llm
+
+Commit Report: 66c16848
+Mode: offline (--no-llm)
+Files Changed: 1
+Insertions: 1
+Deletions: 1
+
+Blast Radius
+No cross-file dependencies detected.
+
+Timeline
+-1m  safe commit
+T+0  break it</code></pre>
+              </div>
+              <div class="proof-panel">
+                <span class="proof-label">Sample postmortem</span>
+                <pre><code># Postmortem: 9af31c2d - SEV2
+
+Root Cause
+Provider-aware model fallback was removed
+during a config refactor.
+
+Immediate Actions
+- [P0] restore fallback logic
+- [P1] add startup smoke tests
+
+Prevention Checklist
+- TEST add provider default regression coverage
+- TOOLING run release smoke checks</code></pre>
+              </div>
+            </div>
+          </article>
+
+          <article class="story-card" data-reveal>
+            <p class="eyebrow">For maintainers</p>
+            <h3>Designed for the uncomfortable follow-up questions</h3>
+            <p>
+              What changed? What else could this affect? How did the incident unfold?
+              What should we fix first? The output format is built around those questions.
+            </p>
+          </article>
+
+          <article class="story-card" data-reveal>
+            <p class="eyebrow">For teams</p>
+            <h3>Moves cleanly from terminal output to written incident record</h3>
+            <p>
+              Run it locally, export Markdown or HTML, and drop the result into docs,
+              chat, follow-up issues, or a post-incident review without reshaping it.
+            </p>
+          </article>
+        </section>
+
+        <section class="section anatomy-section" id="anatomy" data-section="anatomy" data-reveal>
+          <div class="section-heading">
+            <p class="eyebrow">Output anatomy</p>
+            <h2>Everything the incident room wants to know, in one pass</h2>
+            <p class="section-copy">
+              The report is intentionally structured so it reads like an incident review,
+              not like a raw diff explanation.
+            </p>
+          </div>
+
+          <div class="anatomy-grid">
+            <article class="anatomy-card" data-reveal>
+              <span class="anatomy-index">01</span>
+              <h3>Incident summary</h3>
+              <p>Commit, author, severity, impact, confidence, and time-to-detect.</p>
+            </article>
+            <article class="anatomy-card" data-reveal>
+              <span class="anatomy-index">02</span>
+              <h3>Root cause</h3>
+              <p>Specific trigger, contributing factors, and explicit unknowns.</p>
+            </article>
+            <article class="anatomy-card" data-reveal>
+              <span class="anatomy-index">03</span>
+              <h3>Blast radius</h3>
+              <p>Changed files, likely dependents, and affected system components.</p>
+            </article>
+            <article class="anatomy-card" data-reveal>
+              <span class="anatomy-index">04</span>
+              <h3>Timeline</h3>
+              <p>Nearby commits reconstructed into a sequence that explains the incident.</p>
+            </article>
+            <article class="anatomy-card" data-reveal>
+              <span class="anatomy-index">05</span>
+              <h3>Immediate actions</h3>
+              <p>Prioritized steps with role-oriented ownership, not vague TODOs.</p>
+            </article>
+            <article class="anatomy-card" data-reveal>
+              <span class="anatomy-index">06</span>
+              <h3>Never-again checklist</h3>
+              <p>Tests, tooling, monitoring, documentation, and process improvements.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section process-section" data-reveal>
+          <div class="section-heading">
+            <p class="eyebrow">How it works</p>
+            <h2>Git facts first, LLM judgment second</h2>
+          </div>
+
+          <div class="process-layout">
+            <article class="process-card" data-reveal>
+              <ol class="process-list">
+                <li>
+                  <strong>Extract</strong>
+                  <span>Commit metadata, raw diff, and nearby history come from git directly.</span>
+                </li>
+                <li>
+                  <strong>Map</strong>
+                  <span>Structured diff parsing and dependency walking estimate likely blast radius.</span>
+                </li>
+                <li>
+                  <strong>Explain</strong>
+                  <span>Provider-backed analysis turns those facts into a postmortem narrative.</span>
+                </li>
+              </ol>
+            </article>
+
+            <article class="process-visual-card" data-reveal>
+              <img
+                src="./assets/flow-diagram.svg"
+                alt="Three-step flow diagram for gitmortem"
+                loading="lazy"
+              />
+            </article>
+          </div>
+        </section>
+
+        <section class="section install-section" id="install" data-section="install" data-reveal>
           <div class="section-heading">
             <p class="eyebrow">Install</p>
             <h2>Pick the path your team will actually use</h2>
-            <p>
-              The Python package is the primary distribution. The bash installer and
-              npm wrapper exist to reduce friction for people who discover the repo first.
+            <p class="section-copy">
+              Start with the Python path if you want the cleanest install. The other
+              methods exist to reduce discovery friction, not to replace the core runtime.
             </p>
           </div>
 
           <div class="install-panel">
             <div class="tab-list" role="tablist" aria-label="Install methods">
-              <button class="tab-button is-active" type="button" data-tab="pip">pip</button>
-              <button class="tab-button" type="button" data-tab="curl">curl | bash</button>
-              <button class="tab-button" type="button" data-tab="npm">npm</button>
-              <button class="tab-button" type="button" data-tab="offline">offline</button>
+              <button
+                class="tab-button is-active"
+                type="button"
+                data-tab="pip"
+                aria-selected="true"
+              >
+                pip
+              </button>
+              <button class="tab-button" type="button" data-tab="curl" aria-selected="false">
+                curl | bash
+              </button>
+              <button class="tab-button" type="button" data-tab="powershell" aria-selected="false">
+                PowerShell
+              </button>
+              <button class="tab-button" type="button" data-tab="npm" aria-selected="false">
+                npm
+              </button>
             </div>
 
             <div class="tab-panels">
-              <section class="tab-panel is-active" data-panel="pip">
+              <section class="tab-panel is-active" data-panel="pip" role="tabpanel">
                 <div class="code-block">
                   <button class="copy-button" type="button">Copy</button>
                   <pre><code>python -m pip install git+https://github.com/lekhanpro/gitmortem.git
@@ -109,159 +329,172 @@ export GROQ_API_KEY=your_key
 gitmortem HEAD~1</code></pre>
                 </div>
                 <p class="tab-note">
-                  The repo is PyPI-ready. After the first tagged publish, this becomes
-                  <code>pip install gitmortem</code>.
+                  This works today directly from GitHub. After the first tagged PyPI
+                  release, the install line becomes <code>pip install gitmortem</code>.
                 </p>
               </section>
-              <section class="tab-panel" data-panel="curl">
+
+              <section class="tab-panel" data-panel="curl" role="tabpanel">
                 <div class="code-block">
                   <button class="copy-button" type="button">Copy</button>
                   <pre><code>curl -fsSL https://raw.githubusercontent.com/lekhanpro/gitmortem/main/install.sh | bash
 gitmortem HEAD~1 --no-llm</code></pre>
                 </div>
               </section>
-              <section class="tab-panel" data-panel="npm">
+
+              <section class="tab-panel" data-panel="powershell" role="tabpanel">
+                <div class="code-block">
+                  <button class="copy-button" type="button">Copy</button>
+                  <pre><code>irm https://raw.githubusercontent.com/lekhanpro/gitmortem/main/install.ps1 | iex
+python -m gitmortem HEAD~1</code></pre>
+                </div>
+              </section>
+
+              <section class="tab-panel" data-panel="npm" role="tabpanel">
                 <div class="code-block">
                   <button class="copy-button" type="button">Copy</button>
                   <pre><code>npm install -g github:lekhanpro/gitmortem
 gitmortem HEAD~1</code></pre>
                 </div>
                 <p class="tab-note">
-                  The npm package is a thin wrapper that installs and runs the Python CLI.
-                  Python 3.10+ still does the actual analysis.
+                  Useful in JavaScript-heavy environments. The actual analysis still runs
+                  through Python 3.10+ under the hood.
                 </p>
-              </section>
-              <section class="tab-panel" data-panel="offline">
-                <div class="code-block">
-                  <button class="copy-button" type="button">Copy</button>
-                  <pre><code>gitmortem HEAD~1 --no-llm -o reports/incident.md --html</code></pre>
-                </div>
               </section>
             </div>
           </div>
         </section>
 
-        <section class="demo-section" id="demo">
+        <section class="section preview-section" data-reveal>
           <div class="section-heading">
-            <p class="eyebrow">Demo</p>
-            <h2>Fast enough for incident mode, structured enough for follow-through</h2>
-            <p>
-              You need one glance to understand what broke, what else is exposed, and what
-              to fix first. The output is designed for that moment.
-            </p>
+            <p class="eyebrow">Preview</p>
+            <h2>Readable in the terminal, readable when shared upward</h2>
           </div>
 
-          <div class="demo-grid">
-            <article class="media-card">
-              <img
-                src="./assets/demo-terminal.svg"
-                alt="Terminal demo showing gitmortem output"
-                loading="lazy"
-              />
-              <div class="media-copy">
-                <h3>Terminal-first experience</h3>
-                <p>
-                  Rich output for local incident work, with enough structure to drop
-                  directly into chat, docs, or follow-up issues.
-                </p>
+          <div class="preview-layout">
+            <article class="preview-copy" data-reveal>
+              <p class="section-copy">
+                Markdown and HTML keep the same information architecture, so the report
+                survives the jump from local debugging into written incident follow-up.
+              </p>
+              <div class="launch-grid launch-grid-tight">
+                <a href="https://github.com/lekhanpro/gitmortem/blob/main/examples/sample-postmortem.md">
+                  Open sample report
+                </a>
+                <a href="https://github.com/lekhanpro/gitmortem/blob/main/README.md">
+                  Read the README
+                </a>
               </div>
             </article>
 
-            <article class="media-card">
-              <img
-                src="./assets/report-preview.svg"
-                alt="Preview of a rendered incident report"
-                loading="lazy"
-              />
-              <div class="media-copy">
-                <h3>Postmortem output that stays readable</h3>
-                <p>
-                  Markdown and HTML keep the same information architecture: summary,
-                  blast radius, timeline, actions, prevention, detection.
-                </p>
+            <article class="preview-media" data-reveal>
+              <div class="report-sheet" aria-label="Rendered report excerpt">
+                <div class="report-row report-row-header">
+                  <span>Postmortem: 9af31c2d</span>
+                  <strong>SEV2</strong>
+                </div>
+                <div class="report-grid">
+                  <div>
+                    <span class="report-label">Impact</span>
+                    <p>CLI failed before report generation for default-provider users.</p>
+                  </div>
+                  <div>
+                    <span class="report-label">Confidence</span>
+                    <p>High, because the startup path changed directly in provider config.</p>
+                  </div>
+                  <div>
+                    <span class="report-label">Trigger</span>
+                    <p>Release shipped with Groq as default and no explicit model override.</p>
+                  </div>
+                  <div>
+                    <span class="report-label">Immediate</span>
+                    <p>Restore fallback logic and add startup regression tests.</p>
+                  </div>
+                </div>
               </div>
             </article>
           </div>
         </section>
 
-        <section class="feature-section" id="why">
-          <div class="section-heading">
-            <p class="eyebrow">Why it lands</p>
-            <h2>Features that help a repo get used, shared, and starred</h2>
-          </div>
-
-          <div class="feature-grid">
-            <article class="feature-card">
-              <h3>Opinionated output</h3>
-              <p>
-                This is not another diff summarizer. The report is shaped like an actual
-                production postmortem with severity, timeline, and prevention work.
-              </p>
-            </article>
-            <article class="feature-card">
-              <h3>Real install paths</h3>
-              <p>
-                Teams can adopt it through pip, a curl bootstrap, or npm wrapper
-                discovery without changing the core Python package.
-              </p>
-            </article>
-            <article class="feature-card">
-              <h3>Provider flexibility</h3>
-              <p>
-                Groq is the default, but the provider layer is not locked in. That lowers
-                switching cost and keeps the tool usable across teams and budgets.
-              </p>
-            </article>
-            <article class="feature-card">
-              <h3>Launch surface included</h3>
-              <p>
-                README, Pages site, sample report, badges, release flow, and CI are all
-                part of the repo instead of afterthoughts.
-              </p>
-            </article>
-          </div>
-        </section>
-
-        <section class="provider-section">
+        <section class="section provider-section" data-reveal>
           <div class="section-heading">
             <p class="eyebrow">Providers</p>
             <h2>Groq by default, not by lock-in</h2>
+            <p class="section-copy">
+              Teams pick providers for speed, compliance, price, or internal routing.
+              The default path is opinionated, but the architecture stays flexible.
+            </p>
           </div>
 
           <div class="provider-grid">
-            <article><strong>Groq</strong><span>Default fast path</span></article>
-            <article><strong>OpenAI</strong><span>Native API support</span></article>
-            <article><strong>Anthropic</strong><span>Native messages API</span></article>
-            <article><strong>OpenRouter</strong><span>Model routing</span></article>
-            <article><strong>Ollama</strong><span>Local models</span></article>
-            <article><strong>Compatible</strong><span>Bring your own endpoint</span></article>
+            <article data-reveal><strong>Groq</strong><span>Default fast path for launch</span></article>
+            <article data-reveal><strong>OpenAI</strong><span>Native API support</span></article>
+            <article data-reveal><strong>Anthropic</strong><span>Native messages API</span></article>
+            <article data-reveal><strong>OpenRouter</strong><span>Unified model routing</span></article>
+            <article data-reveal><strong>Ollama</strong><span>Local model support</span></article>
+            <article data-reveal><strong>Compatible</strong><span>Bring your own endpoint</span></article>
           </div>
         </section>
 
-        <section class="launch-kit">
+        <section class="section faq-section" id="faq" data-section="faq" data-reveal>
           <div class="section-heading">
-            <p class="eyebrow">Launch kit</p>
-            <h2>Everything around the package matters too</h2>
+            <p class="eyebrow">FAQ</p>
+            <h2>Short answers to the questions people ask before they try it</h2>
           </div>
-          <div class="launch-grid">
-            <a href="https://github.com/lekhanpro/gitmortem/blob/main/examples/sample-postmortem.md">
-              Sample report
+
+          <div class="faq-grid">
+            <article class="faq-card" data-reveal>
+              <h3>Does it work without an LLM?</h3>
+              <p>
+                Yes. <code>--no-llm</code> renders a deterministic report from git facts,
+                parsed diff details, blast radius heuristics, and surrounding commit history.
+              </p>
+            </article>
+            <article class="faq-card" data-reveal>
+              <h3>Is npm the primary package?</h3>
+              <p>
+                No. The Python package is primary. The npm package exists as a discovery
+                and install wrapper for teams that start from JavaScript tooling.
+              </p>
+            </article>
+            <article class="faq-card" data-reveal>
+              <h3>Can I swap providers later?</h3>
+              <p>
+                Yes. Provider selection is runtime configuration. Groq is the default, but
+                the CLI does not hard-code you into one vendor.
+              </p>
+            </article>
+            <article class="faq-card" data-reveal>
+              <h3>Is it ready for release?</h3>
+              <p>
+                Yes. CI, GitHub Pages deployment, GitHub releases, and PyPI publishing
+                workflow are already in the repo. The remaining operational step is your
+                first version tag and PyPI credential configuration.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section final-cta" data-reveal>
+          <div class="final-cta-copy">
+            <p class="eyebrow">Call to action</p>
+            <h2>If you have ever needed to explain a bad deploy fast, start here.</h2>
+            <p class="section-copy">
+              Read the sample report, install the CLI, and run it against a real commit in
+              your repo. That is the fastest way to decide whether it earns a place in your workflow.
+            </p>
+          </div>
+          <div class="final-cta-actions">
+            <a class="button button-primary" href="https://github.com/lekhanpro/gitmortem">
+              Star on GitHub
             </a>
-            <a href="https://github.com/lekhanpro/gitmortem/blob/main/install.sh">
-              Bash installer
-            </a>
-            <a href="https://github.com/lekhanpro/gitmortem/blob/main/package.json">
-              npm wrapper
-            </a>
-            <a href="https://github.com/lekhanpro/gitmortem/blob/main/.github/workflows/publish.yml">
-              PyPI publish flow
-            </a>
+            <a class="button button-secondary" href="#install">Try install paths</a>
           </div>
         </section>
       </main>
 
       <footer class="site-footer">
-        <p>gitmortem is built for people who have to explain production failures clearly.</p>
+        <p>gitmortem is built for teams that want sharper incident explanations, faster.</p>
         <div class="footer-links">
           <a href="https://github.com/lekhanpro/gitmortem">GitHub</a>
           <a href="https://github.com/lekhanpro/gitmortem/blob/main/README.md">README</a>

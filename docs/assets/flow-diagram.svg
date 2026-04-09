@@ -1,0 +1,46 @@
+<svg width="960" height="560" viewBox="0 0 960 560" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="560" rx="32" fill="#0F141B"/>
+  <rect x="24" y="24" width="912" height="512" rx="28" fill="#111823" stroke="#283346"/>
+  <text x="56" y="78" fill="#7ED8C1" font-family="IBM Plex Mono" font-size="16" letter-spacing="0.16em">HOW IT WORKS</text>
+  <text x="56" y="118" fill="#F4EFE6" font-family="Space Grotesk" font-size="36" font-weight="700" letter-spacing="-0.04em">Three steps from commit to postmortem</text>
+  <text x="56" y="150" fill="#B8C0CB" font-family="Space Grotesk" font-size="18">Fast enough for incident mode, structured enough for follow-up.</text>
+  <g>
+    <rect x="70" y="214" width="230" height="188" rx="24" fill="#182130" stroke="#314055"/>
+    <circle cx="118" cy="262" r="24" fill="#FF9C54"/>
+    <text x="110" y="270" fill="#17120F" font-family="IBM Plex Mono" font-size="18" font-weight="700">1</text>
+    <text x="154" y="258" fill="#F4EFE6" font-family="Space Grotesk" font-size="24" font-weight="700">Capture</text>
+    <text x="154" y="288" fill="#B8C0CB" font-family="Space Grotesk" font-size="16">Read the commit hash,</text>
+    <text x="154" y="312" fill="#B8C0CB" font-family="Space Grotesk" font-size="16">diff, author, and nearby</text>
+    <text x="154" y="336" fill="#B8C0CB" font-family="Space Grotesk" font-size="16">history from git.</text>
+    <rect x="94" y="356" width="186" height="18" rx="9" fill="#243042"/>
+  </g>
+  <path d="M318 308H396" stroke="#FF9C54" stroke-width="6" stroke-linecap="round"/>
+  <path d="M386 292L404 308L386 324" stroke="#FF9C54" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <g>
+    <rect x="400" y="214" width="230" height="188" rx="24" fill="#182130" stroke="#314055"/>
+    <circle cx="448" cy="262" r="24" fill="#7ED8C1"/>
+    <text x="440" y="270" fill="#0E1117" font-family="IBM Plex Mono" font-size="18" font-weight="700">2</text>
+    <text x="484" y="258" fill="#F4EFE6" font-family="Space Grotesk" font-size="24" font-weight="700">Analyze</text>
+    <text x="484" y="288" fill="#B8C0CB" font-family="Space Grotesk" font-size="16">Parse the diff into</text>
+    <text x="484" y="312" fill="#B8C0CB" font-family="Space Grotesk" font-size="16">facts, blast radius, and</text>
+    <text x="484" y="336" fill="#B8C0CB" font-family="Space Grotesk" font-size="16">LLM-ready summaries.</text>
+    <rect x="424" y="356" width="186" height="18" rx="9" fill="#243042"/>
+  </g>
+  <path d="M648 308H726" stroke="#FF9C54" stroke-width="6" stroke-linecap="round"/>
+  <path d="M716 292L734 308L716 324" stroke="#FF9C54" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <g>
+    <rect x="730" y="214" width="160" height="188" rx="24" fill="#182130" stroke="#314055"/>
+    <circle cx="778" cy="262" r="24" fill="#FCEBD8"/>
+    <text x="770" y="270" fill="#17120F" font-family="IBM Plex Mono" font-size="18" font-weight="700">3</text>
+    <text x="750" y="258" fill="#F4EFE6" font-family="Space Grotesk" font-size="24" font-weight="700">Ship</text>
+    <text x="750" y="290" fill="#B8C0CB" font-family="Space Grotesk" font-size="16">Render markdown or</text>
+    <text x="750" y="314" fill="#B8C0CB" font-family="Space Grotesk" font-size="16">HTML, then publish the</text>
+    <text x="750" y="338" fill="#B8C0CB" font-family="Space Grotesk" font-size="16">report.</text>
+    <rect x="754" y="356" width="112" height="18" rx="9" fill="#243042"/>
+  </g>
+  <g>
+    <rect x="110" y="430" width="744" height="42" rx="21" fill="#172130" stroke="#2C394A"/>
+    <text x="136" y="457" fill="#B8C0CB" font-family="IBM Plex Mono" font-size="15">$ gitmortem abc1234 --provider groq --html</text>
+    <text x="630" y="457" fill="#7ED8C1" font-family="IBM Plex Mono" font-size="15">root cause, blast radius, timeline, actions</text>
+  </g>
+</svg>
