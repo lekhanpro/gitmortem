@@ -1,0 +1,14 @@
+.pytest_cache/
+.ruff_cache/
+.venv/
+__pycache__/
+*.egg-info/
+*.html
+*.md.html
+*.pyc
+build/
+dist/
+htmlcov/
+reports/
+.env
+temp-repo/
